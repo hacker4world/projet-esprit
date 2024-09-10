@@ -1,0 +1,172 @@
+<div class="main_content_iner">
+  <div class="container-fluid p-0">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="white_card card_height_100 mb_30">
+          <div class="white_card_body">
+            <div class="QA_section">
+
+              <div class="row">
+                <div class="col-lg-2">
+                  <h4>Classroom Information:</h4>
+                </div>
+                <div class="col-lg-6">
+                  <a (click)="goToModify()" class="btn_1" style="align-items: start;">Modify</a>
+                </div>
+              </div>
+
+
+
+              <div class="classroom-details">
+                <p><strong>Group Name:</strong> {{ classroom.groupName }}</p>
+                <p><strong>Level:</strong> {{ classroom.level }}</p>
+                <p><strong>Created Date:</strong> {{ classroom.createdDate }}</p>
+                <p><strong>Updated Date:</strong> {{ classroom.updatedDate }}</p>
+              </div>
+
+
+              <br>
+              <br>
+
+
+              <div class="row">
+                <!-- Users Table -->
+                <div class="col-lg-6">
+
+                  <div class="QA_section">
+
+                    <div class="white_box_tittle list_header">
+                      <h4>Students</h4>
+                      <div class="box_right d-flex lms_block">
+                        <div class="add_button ms-2">
+                          <a (click)="goAssignNewStudent()" data-toggle="modal" data-target="#addcategory"
+                            class="btn_1">Assign New Student</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="QA_table mb_30">
+                      <table class="table lms_table_active3">
+                        <thead>
+                          <tr>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Created Date</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @for (user of users; track $index)
+                          {
+                          <tr>
+                            <td (click)="goToStudentTestEvaluations(user.id)">{{ user.firstName }}</td>
+                            <td (click)="goToStudentTestEvaluations(user.id)">{{ user.lastName }}</td>
+                            <td (click)="goToStudentTestEvaluations(user.id)">{{ user.createdDate }}</td>
+                            <td> <button class="btn btn-danger" (click)="removeStudent(user.id)">Remove</button></td>
+                          </tr>
+                          }
+                        </tbody>
+                      </table>
+                    </div>
+
+                    @if (users.length) {
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination justify-content-end">
+                        <li class="page-item" [class.disabled]="usersPageNumber === 1" (click)="previousUsersPage()">
+                          <a class="page-link">Previous</a>
+                        </li>
+
+                        @for (page of usersTotalPagesArray(); track $index)
+                        {
+                        <li class="page-item" [class.active]="usersPageNumber === page" (click)="goToUsersPage(page)">
+                          <a class="page-link">{{ page }}</a>
+                        </li>
+                        }
+
+                        <li class="page-item" [class.disabled]="usersPageNumber === usersTotalPages"
+                          (click)="nextUsersPage()">
+                          <a class="page-link">Next</a>
+                        </li>
+                      </ul>
+                    </nav>
+                    }
+                  </div>
+                </div>
+
+                <!-- Subjects Table -->
+                <div class="col-lg-6">
+
+                  <div class="QA_section">
+
+                    <div class="white_box_tittle list_header">
+                      <h4>Subjects</h4>
+                      <div class="box_right d-flex lms_block">
+                        <div class="serach_field_2">
+                        </div>
+                        <div class="add_button ms-2">
+                          <a (click)="goToCreateSubject()" data-toggle="modal" data-target="#addcategory"
+                            class="btn_1">Add New Subject</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="QA_table mb_30">
+                      <table class="table lms_table_active3">
+                        <thead>
+                          <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Total Hours</th>
+                            <th scope="col">Coefficient</th>
+                            <th scope="col">ClassRoomGroup Name</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @for (subject of subjects; track $index)
+                          {
+                          <tr (click)="goToSubjectDetails(subject.id)">
+                            <td>{{ subject.name }}</td>
+                            <td>{{ subject.totalHours }}</td>
+                            <td>{{ subject.coefficient }}</td>
+                            <td>{{ subject.classRoomGroupName }}</td>
+                          </tr>
+                          }
+                        </tbody>
+                      </table>
+                    </div>
+
+                    @if (subjects.length) {
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination justify-content-end">
+                        <li class="page-item" [class.disabled]="subjectsPageNumber === 1"
+                          (click)="previousSubjectsPage()">
+                          <a class="page-link">Previous</a>
+                        </li>
+
+                        @for (page of subjectsTotalPagesArray(); track $index)
+                        {
+                        <li class="page-item" [class.active]="subjectsPageNumber === page"
+                          (click)="goToSubjectsPage(page)">
+                          <a class="page-link">{{ page }}</a>
+                        </li>
+                        }
+
+                        <li class="page-item" [class.disabled]="subjectsPageNumber === subjectsTotalPages"
+                          (click)="nextSubjectsPage()">
+                          <a class="page-link">Next</a>
+                        </li>
+                      </ul>
+                    </nav>
+                    }
+
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,511 @@
+<!-- KPI Section -->
+<div class="row">
+  <div class="col-sm-6 col-lg-3">
+    <div class="white_card card_height_100 mb_30">
+      <div class="white_card_body">
+        <div class="text-center">
+          <h5>Total documents</h5>
+          <h2>{{ totalDocuments }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="white_card card_height_100 mb_30">
+      <div class="white_card_body">
+        <div class="text-center">
+          <h5>Documents pending</h5>
+          <h2>{{ pendingDocuments }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="white_card card_height_100 mb_30">
+      <div class="white_card_body">
+        <div class="text-center">
+          <h5>Documents in progress</h5>
+          <h2>{{ inProgressDocument }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="white_card card_height_100 mb_30">
+      <div class="white_card_body">
+        <div class="text-center">
+          <h5>Documents resolved</h5>
+          <h2>{{ resolvedDocuments }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End KPI Section -->
+
+<div class="col-lg-12">
+  <div class="white_card card_height_100 mb_30 pt-4">
+    <div class="white_card_body">
+      <div class="QA_section">
+        <div class="white_box_tittle list_header">
+          <h4>List of document requests</h4>
+          <div class="box_right d-flex lms_block">
+            <div class="serach_field_2 ms-2">
+              <select id="state" (change)="filterStatus($event)" class="ms-2">
+                <option value="">Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Completed">Completed</option>
+              </select>
+              <select id="state" (change)="filterType($event)" class="ms-2">
+                <option value="">Type</option>
+                <option value="diploma">Diploma</option>
+                <option value="transcript">Transcript</option>
+
+                <option value="studentCard">StudentCard</option>
+                <option value="attendanceCertificate">
+                  AttendanceCertificate
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="mb_30">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link active"
+                id="drafts-tab"
+                data-bs-toggle="tab"
+                href="#drafts"
+                role="tab"
+                aria-controls="drafts"
+                aria-selected="true"
+                >Drafts</a
+              >
+            </li>
+
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
+                id="archived-tab"
+                data-bs-toggle="tab"
+                href="#archived"
+                role="tab"
+                aria-controls="archived"
+                aria-selected="false"
+                >Archived</a
+              >
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div
+              class="tab-pane fade show active"
+              id="drafts"
+              role="tabpanel"
+              aria-labelledby="drafts-tab"
+            >
+              <table class="QA_table table lms_table_active">
+                <thead>
+                  <tr>
+                    <th scope="col">Created the</th>
+                    <th scope="col">Created by</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let document of documenets">
+                    <td>{{ document.createdAt }}</td>
+                    <td>
+                      {{ document.user.firstName }} {{ document.user.lastName }}
+                    </td>
+                    <td>
+                      <span class="badge rounded-pill bg-warning">{{
+                        document.type
+                      }}</span>
+                    </td>
+                    <td>
+                      <span class="badge rounded-pill bg-primary">{{
+                        document.status
+                      }}</span>
+                    </td>
+
+                    <td *ngIf="document.status === 'Pending'">
+                      <a class="action_btn">
+                        <i
+                          (click)="onSelectDocument(document)"
+                          class="ti-close"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModalCenter"
+                        ></i
+                      ></a>
+                      <a
+                        class="action_btn"
+                        (click)="onSelectDocument(document)"
+                      >
+                        <i
+                          class="ti-check"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModalLong"
+                        ></i
+                      ></a>
+                    </td>
+
+                    <td>
+                      <div class="d-flex justify-content-between">
+                        <button
+                          *ngIf="document.status === 'Rejected'"
+                          class="action-button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModalLong1"
+                          (click)="onSelectDocument(document)"
+                        >
+                          <span class="icon">!</span>
+                        </button>
+
+                        <button
+                          *ngIf="
+                            document.status === 'Rejected' ||
+                            document.status === 'Completed'
+                          "
+                          class="action-button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModalLong2"
+                          (click)="onSelectDocument(document)"
+                        >
+                          <span class="ti-archive primary-color"></span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              @if (documenets.length) {
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                  <li
+                    class="page-item"
+                    [class.disabled]="pageNumber === 1"
+                    (click)="previousPage()"
+                  >
+                    <a class="page-link">Previous</a>
+                  </li>
+                  <li
+                    *ngFor="let page of totalPagesArray()"
+                    class="page-item"
+                    [class.active]="pageNumber === page"
+                    (click)="goToPage(page)"
+                  >
+                    <a class="page-link">{{ page }}</a>
+                  </li>
+                  <li
+                    class="page-item"
+                    [class.disabled]="pageNumber === totalPages"
+                    (click)="nextPage()"
+                  >
+                    <a class="page-link">Next</a>
+                  </li>
+                </ul>
+              </nav>
+              }
+            </div>
+
+            <div
+              class="tab-pane fade"
+              id="archived"
+              role="tabpanel"
+              aria-labelledby="archived-tab"
+            >
+              <!-- Content for Archived -->
+              <table class="QA_table table lms_table_active">
+                <thead>
+                  <tr>
+                    <th scope="col">Created the</th>
+                    <th scope="col">Created by</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let document of documenetsA">
+                    <td>{{ document.createdAt }}</td>
+                    <td>
+                      {{ document.user.firstName }} {{ document.user.lastName }}
+                    </td>
+                    <td>
+                      <span class="badge rounded-pill bg-warning">{{
+                        document.type
+                      }}</span>
+                    </td>
+                    <td>
+                      <span class="badge rounded-pill bg-primary">{{
+                        document.status
+                      }}</span>
+                    </td>
+                    <td>
+                      <div class="button-container">
+                        <button
+                          class="btn btn-danger"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModalLong3"
+                          (click)="onSelectDocument(document)"
+                        >
+                          <span class="ti-trash"></span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              @if (documenetsA.length) {
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                  <li
+                    class="page-item"
+                    [class.disabled]="pageNumber === 1"
+                    (click)="previousPageA()"
+                  >
+                    <a class="page-link">Previous</a>
+                  </li>
+                  <li
+                    *ngFor="let page of totalPagesArrayA()"
+                    class="page-item"
+                    [class.active]="pageNumberA === page"
+                    (click)="goToPageA(page)"
+                  >
+                    <a class="page-link">{{ page }}</a>
+                  </li>
+                  <li
+                    class="page-item"
+                    [class.disabled]="pageNumberA === totalPages"
+                    (click)="nextPageA()"
+                  >
+                    <a class="page-link">Next</a>
+                  </li>
+                </ul>
+              </nav>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+  #exampleModalCenter
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modification</h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Voulez-vous vraiment rejeter cette demande ?</p>
+        <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <textarea
+                class="form-control"
+                maxlength="225"
+                rows="3"
+                formControlName="comment"
+                placeholder="Raison"
+              ></textarea>
+              <div
+                *ngIf="
+                  updateForm.get('comment')?.invalid &&
+                  updateForm.get('comment')?.touched
+                "
+              >
+                Raison est obligatoire
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Annuler
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="updateForm.invalid"
+            >
+              Modifier
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="exampleModalLong"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true"
+  #exampleModalLong
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modifications</h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Do you really want to mark this request for documents as completed ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-success" (click)="updateStatus()">
+          Validate
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModalLong1"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true"
+  #exampleModalLong1
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ selectedDocument?.comment }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModalLong2"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true"
+  #exampleModalLong2
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Do you really want to archive the request document ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="updateStatusArchivied()"
+        >
+          Archive
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModalLong3"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true"
+  #exampleModalLong3
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Deletion</h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Do you really want to delete the request document ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-danger" (click)="delete()">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

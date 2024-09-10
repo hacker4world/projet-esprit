@@ -1,0 +1,172 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                <div class="page_title_left d-flex align-items-center">
+                    <h3 class="f_s_25 f_w_700 dark_text mr_30">Dashboard</h3>
+                    <ol class="breadcrumb page_bradcam mb-0">
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+                        <li class="breadcrumb-item active">Analytic</li>
+                    </ol>
+                </div>
+                <div class="page_title_right">
+                    <div class="page_date_button d-flex align-items-center">
+                        <img src="img/icon/calender_icon.svg" alt>
+                        August 1, 2020 - August 31, 2020
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="white_card card_height_100 mb_30 pt-4">
+                <div class="white_card_body">
+                    <div class="QA_section">
+                        <div class="white_box_tittle list_header">
+                            <button class="btn btn-primary" (click)="openAddModal()">Add Book</button>
+                            <div class="box_right d-flex lms_block">
+                                <div class="serach_field_2">
+                                    <div class="search_inner">
+                                        <form [formGroup]="searchBookForm" (ngSubmit)="submitFormSearch()">
+                                            <div class="search_field">
+                                                <input type="text" placeholder="Search content here..." formControlName ="title">
+                                            </div>
+                                            <button type="submit"> <i class="ti-search"></i> </button>
+                                        </form>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="QA_table mb_30">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Author</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Nb Pages</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let book of books">
+                                        <td>{{ book.title }}</td>
+                                        <td>{{ book.author }}</td>
+                                        <td> {{ book.description }}</td>
+                                        
+                                        <td><img [src]="'assets/img/' + book.imageUrl" alt="Book Image" style="max-width: 80px; height: auto;"></td>
+                                        <td>{{ getCategoryNameById(book.categoryId) }}</td>
+                                        <td>{{ book.nbPage }}</td>
+                                        
+                                        <td>
+                                            <span class="badge rounded-pill bg-warning">{{book.state}}</span>
+                                          </td>
+                                          
+                                        <td>
+                                            <div class="action_btns d-flex">
+                                                <a class="action_btn mr_10" (click)="openEditModal(book)">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
+                                                <a class="action_btn" (click)="deleteBook(book)">
+                                                    <i class="fas fa-trash" ></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isModalOpen" class="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookModalLabel">{{ selectedBook ? 'Edit Book' : 'Add Book' }}</h5>
+                    <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form [formGroup]="bookForm" (ngSubmit)="saveBook()">
+                    <div class="modal-body">
+                        <div class="common_input mb_15">
+                            <input id="title" placeholder="Title" formControlName="title" class="form-control"
+                                [ngClass]="{ 'is-invalid': bookForm.get('title')?.invalid && bookForm.get('title')?.touched }" />
+                            <div class="invalid-feedback"
+                                *ngIf="bookForm.get('title')!.invalid && bookForm.get('title')!.touched">
+                                Title is required
+                            </div>
+                        </div>
+                        <div class="common_input mb_15">
+                            <input id="author" placeholder="Author" formControlName="author" class="form-control"
+                                [ngClass]="{ 'is-invalid': bookForm.get('author')?.invalid && bookForm.get('author')?.touched }" />
+                            <div class="invalid-feedback"
+                                *ngIf="bookForm.get('author')!.invalid && bookForm.get('author')!.touched">
+                                Author is required
+                            </div>
+                        </div>
+                        <div class="common_input mb_15">
+                            <input id="nbPage" placeholder="Number of Pages" formControlName="nbPage" class="form-control"
+                                [ngClass]="{ 'is-invalid': bookForm.get('nbPage')?.invalid && bookForm.get('nbPage')?.touched }" />
+                            <div class="invalid-feedback"
+                                *ngIf="bookForm.get('nbPage')!.invalid && bookForm.get('nbPage')!.touched">
+                                Number of Pages is required
+                            </div>
+                        </div>
+                        <div class="common_input mb_15">
+                            <textarea id="description" placeholder="Description" formControlName="description"
+                                class="form-control"></textarea>
+                        </div>
+                        <div class="common_input mb_15">
+                            <select id="categoryId" formControlName="categoryId" placeholder="Select Category"
+                                class="form-select">
+                                <option value="0" disabled>Select Category</option>
+                                <option *ngFor="let category of categories" [value]="category.id">{{
+                                    category.categoryName }}</option>
+                            </select>
+                        </div>
+
+                        <div class="common_input mb_15">
+                            <input id="imageUrl" type="file" (change)="onFileChange($event)" class="form-control"
+                                accept="image/jpeg, image/png, image/jpg" />
+                        </div>
+                        <div *ngIf="selectedFile || previewUrl" class="image-preview mb_15">
+                            <img [src]="previewUrl" alt="Image Preview" style="max-width: 30%; height: auto;" />
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+                        <button type="submit" class="btn btn-primary">{{ selectedBook ? 'Update' : 'Add' }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .modal {
+        display: block;
+    }
+</style>

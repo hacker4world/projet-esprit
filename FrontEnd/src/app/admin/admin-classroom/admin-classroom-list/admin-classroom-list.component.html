@@ -1,0 +1,76 @@
+<div class="main_content_iner">
+  <div class="container-fluid p-0">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="white_card card_height_100 mb_30">
+          <div class="white_card_header">
+            <div class="box_header m-0">
+              <div class="main-title">
+                <h3 class="m-0">Admin Classroom</h3>
+              </div>
+            </div>
+          </div>
+          <div class="white_card_body">
+            <div class="QA_section">
+
+              <div class="white_box_tittle list_header">
+                <h4>All Classrooms</h4>
+                <div class="box_right d-flex lms_block">
+                  <div class="serach_field_2">
+                    <div class="search_inner">
+                      <div class="search_field">
+                        <input type="text" placeholder="Search content here..." [(ngModel)]="searchTerm"
+                          (input)="searchClassrooms()">
+                      </div>
+                      <button> <i class="ti-search"></i> </button>
+                    </div>
+                  </div>
+                  <div class="add_button ms-2">
+                    <a (click)="goToAddNew()" class="btn_1">Add New</a>
+                  </div>
+                </div>
+              </div>
+              <div class="QA_table mb_30">
+                <table class="table lms_table_active3">
+                  <thead>
+                    <tr>
+                      <th scope="col">Group Name</th>
+                      <th scope="col">Level</th>
+                      <th scope="col">Created Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let classroom of classrooms" (click)="navigateToDetails(classroom.id)">
+                      <td>{{ classroom.groupName }}</td>
+                      <td>{{ classroom.level }}</td>
+                      <td>{{ classroom.createdDate }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              @if (classrooms.length) {
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-end">
+                    <li class="page-item" [class.disabled]="pageNumber === 1" (click)="previousPage()">
+                      <a class="page-link">Previous</a>
+                    </li>
+                    <li *ngFor="let page of totalPagesArray()" class="page-item" [class.active]="pageNumber === page"
+                      (click)="goToPage(page)">
+                      <a class="page-link">{{ page }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="pageNumber === totalPages" (click)="nextPage()">
+                      <a class="page-link">Next</a>
+                    </li>
+                  </ul>
+                </nav>
+              }
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

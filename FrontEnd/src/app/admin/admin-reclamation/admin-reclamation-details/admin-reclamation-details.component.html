@@ -1,0 +1,280 @@
+<div *ngIf="loading">
+  <div class="loader--spinner yellow_loder mb_30">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+<div *ngIf="!loading" class="d-flex flex-column flex-lg-row">
+  <div class="col-lg-8 mb-3 mb-lg-0">
+    <div class="card gray_card card_height_100 mb_30 pt-4">
+      <div class="white_card_body">
+        <div class="QA_section">
+          <div
+            class="white_box_tittle list_header d-flex align-items-center justify-content-between"
+          >
+            <div>
+              <h4>
+                {{
+                  claim.subject.charAt(0).toUpperCase() + claim.subject.slice(1)
+                }}
+              </h4>
+              <span>Last update: {{ claim.updatedAt }}</span>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="box_right d-flex lms_block">
+                <button
+                  *ngIf="claim.status === 'Pending'"
+                  type="button"
+                  class="btn mb-3 btn-primary me-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModalLong3"
+                >
+                  <i class="fab fa-codiepie f_s_14 me-2"></i>Mark as supported
+                </button>
+
+                <button
+                  *ngIf="
+                    claim.status === 'Pending' || claim.status === 'Approved'
+                  "
+                  type="button"
+                  class="btn mb-3 btn-success me-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModalLong"
+                >
+                  <i class="ti-check f_s_14 me-2"></i>Mark as resolved
+                </button>
+
+                <button
+                  *ngIf="claim.status === 'Completed'"
+                  type="button"
+                  class="btn mb-3 btn-danger"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModalLong2"
+                >
+                  <i class="ti-close f_s_14 me-2"></i>Mark as closed
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mb_30">
+            <div *ngFor="let comment of claim.comments">
+              <div class="col-lg-12">
+                <div class="card_box position-relative mb_30 bg-light">
+                  <div class="white_box_tittle bg-light">
+                    <div class="main-title2 d-flex align-items-center">
+                      <img
+                        [src]="comment.user.avatar"
+                        alt="avatar"
+                        class="rounded-circle me-2"
+                        style="width: 40px; height: 40px"
+                      />
+                      <h4 class="mb-2 nowrap">
+                        {{ comment.user.firstName }} {{ comment.user.lastName }}
+                      </h4>
+                    </div>
+                  </div>
+                  <div class="box_body">
+                    <p class="f-w-400">{{ comment.content }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="mb_30"
+            *ngIf="claim.status !== 'Completed' && claim.status !== 'Rejected'"
+          >
+            <div class="white_box">
+              <form [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+                <div class="row mb-3 justify-content-center">
+                  <div>
+                    <textarea
+                      class="form-control"
+                      maxlength="225"
+                      rows="3"
+                      formControlName="message"
+                      placeholder="Write your message"
+                    ></textarea>
+                    <div
+                      *ngIf="
+                        sendForm.get('message')?.invalid &&
+                        sendForm.get('message')?.touched
+                      "
+                    >
+                      Message est obligatoire
+                    </div>
+                  </div>
+                </div>
+                <div class="row justify-content-end">
+                  <div class="col-lg-6 d-flex justify-content-end">
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      [disabled]="sendForm.invalid"
+                    >
+                      Send
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card gray_card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Information</h5>
+        <p class="card-text">ID: {{ claim.id }}</p>
+        <p class="card-text">Created on: {{ claim.createdAt }}</p>
+        <p class="card-text">
+          Created by: {{ claim.user.firstName }} {{ claim.user.lastName }}
+        </p>
+        <p class="card-text">
+          Type: <span class="badge bg-warning">{{ claim.type }}</span>
+        </p>
+        <p class="card-text">
+          Status: <span class="badge bg-success">{{ claim.status }}</span>
+        </p>
+        <p class="card-text">Last update: {{ claim.updatedAt }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModalLong"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true"
+  #exampleModalLong
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modifications</h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Do you really want to mark this claim as resolved?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="updateStatusCompleted()"
+        >
+          Validate
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModalLong2"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true"
+  #exampleModalLong2
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modifications</h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Do you really want to mark this claim as closed?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="updateStatusClosed()"
+        >
+          Validate
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModalLong3"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true"
+  #exampleModalLong3
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modifications</h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Do you really want to mark this claim as supported?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="updateStatusSupported()"
+        >
+          Validate
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

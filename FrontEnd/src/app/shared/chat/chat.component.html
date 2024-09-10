@@ -1,0 +1,26 @@
+<section class="avenue-messenger" [ngClass]="{'minimized': isMinimized, 'big': !isMinimized}">
+  <div class="menu">
+    <a title="Minimize" (click)="toggleMinimize()" >−</a><br>
+    <a title="End Chat" (click)="resetChat()" >×</a>
+
+  </div>
+
+  <div class="chat" [ngClass]="{'minimized': isMinimized, 'big': !isMinimized}">
+    <div class="chat-title">
+      <h1>get help</h1>
+    </div>
+    <div class="messages" id="messages" >
+      <div class="messages-content">
+        <div *ngFor="let msg of messages; let i = index">
+          <div [class]="owener(msg) === 'me' ? 'message message-personal' : 'message'">
+            <span class="message-text">{{ msg }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="message-box">
+      <textarea type="text" class="message-input" [(ngModel)]="message" placeholder="Type message..."></textarea>
+      <button type="submit" class="message-submit" placeholder="Your message" (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+</section>

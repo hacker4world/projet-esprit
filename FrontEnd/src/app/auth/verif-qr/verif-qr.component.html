@@ -1,0 +1,30 @@
+<div class="main_content_iner ">
+    <div class="container-fluid p-0">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-12">
+                <div class="white_box mb_30">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+
+                            <div class="modal-content cs_modal">
+                                <div class="modal-header theme_bg_1">
+                                    <h5 class="modal-title text_white">Account Verification</h5>
+                                </div>
+                                Check the QrCode to obtain the otp code
+                                <div class="modal-body">
+                                    <form (ngSubmit)="resetPass()">
+                                        <div class>
+                                            <input type="text" class="form-control" [(ngModel)]="userName" name="userName" placeholder="Enter your OTP">
+                                        </div>
+                                        <button type="submit" class="btn_1 full_width text-center">SEND</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

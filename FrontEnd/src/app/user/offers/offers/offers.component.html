@@ -1,0 +1,147 @@
+<div class="main_content_iner overly_inner">
+  <div class="container-fluid p-0">
+    <div class="row">
+      <div class="col-12">
+        <div class="container">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <select
+                id="filterType"
+                class="form-control"
+                [(ngModel)]="selectedType"
+                (change)="loadOffers()"
+              >
+                <option value="">Tous</option>
+                <option *ngFor="let type of offerTypes" [value]="type">
+                  {{ type }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <select
+                id="sortOrder"
+                class="form-control"
+                [(ngModel)]="sortOrder"
+                (change)="applyFilters()"
+              >
+                <option value="asc">A-Z</option>
+                <option value="desc">Z-A</option>
+              </select>
+            </div>
+          </div>
+          <div
+            class="page_title_box d-flex flex-wrap align-items-center justify-content-between"
+          >
+            <div class="page_title_left d-flex align-items-center">
+              <h3 class="f_s_25 f_w_700 dark_text mr_30">Liste des offres</h3>
+            </div>
+            <div class="page_title_right">
+              <div class="page_date_button d-flex align-items-center">
+                <img src="assets/img/icon/calender_icon.svg" alt />
+                {{ currentDate | date : "longDate" }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4" *ngFor="let offer of filteredOffers">
+            <div class="card mb-3">
+              <div class="card-img-overlay">
+                <img
+                  [src]="
+                    offer.user?.profilePicURI
+                      ? offer.user.profilePicURI
+                      : 'https://e7.pngegg.com/pngimages/953/222/png-clipart-computer-icons-avatar-business-user-profile-avatar-heroes-logo.png'
+                  "
+                  class="rounded-circle"
+                  style="
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                    position: absolute;
+                    top: 10px;
+                    left: 10px;
+                  "
+                />
+              </div>
+              <br />
+              <br />
+              <div class="card-body">
+                <h5 class="card-title">{{ offer.titre }}</h5>
+                <p class="card-text">
+                  <span class="description" [title]="offer.description">{{
+                    offer.description
+                  }}</span>
+                </p>
+                <p class="card-text">
+                  Publié le {{ offer.datePublication | date : "shortDate" }}
+                </p>
+                <p class="card-text" *ngIf="!offer.isStillAvailable">
+                  <i class="fas fa-ban"></i> n'accepte plus les candidatures
+                </p>
+                <div class="col-12 d-flex justify-content-end">
+                  <div
+                    class="btn-group"
+                    role="group"
+                    aria-label="Offer Buttons"
+                  >
+                  <button
+                  class="btn btn-primary"
+                  (click)="openOfferDetails(content, offer)"
+                >
+                  View Offer
+                </button>
+                <button
+                class="btn btn-success ms-2"
+                (click)="apply(offer.id)"
+                [disabled]="!offer.isStillAvailable || offer.hasUserApplied"
+                [ngClass]="{
+                  'btn-secondary': !offer.isStillAvailable || offer.hasUserApplied
+                }"
+              >
+                {{ offer.hasUserApplied ? 'Already applied' : 'Postuler' }}
+              </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{selectedOffer?.user?.firstName}}- {{ selectedOffer?.titre }}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>{{ selectedOffer?.description }}</p>
+      <p class="card-text" *ngIf="!selectedOffer?.isStillAvailable">
+        <i class="fas fa-ban"></i> n'accepte plus les candidatures
+      </p>
+      <p>Publié le: {{ selectedOffer?.datePublication | date: 'shortDate' }}</p>
+      <p>Type: {{ selectedOffer?.typeOffre }}</p>
+      <!-- Add other offer details here as needed -->
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary ms-2" (click)="modal.close('Save click')">Close</button> 
+      <div *ngIf="selectedOffer?.isStillAvailable || selectedOffer?.hasUserApplied">  
+        <button
+        type="button"
+        class="btn btn-success"
+        (click)="apply(selectedOffer?.id)"
+        [disabled]="!selectedOffer?.isStillAvailable || selectedOffer?.hasUserApplied"
+      >
+        {{ selectedOffer?.hasUserApplied ? 'Applied' : 'Postuler' }}
+      </button>
+        </div>
+    </div>
+  </ng-template>

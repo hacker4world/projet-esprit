@@ -1,0 +1,37 @@
+<!-- apply.component.html -->
+<div class="container mt-4">
+  <h2>Application Details</h2>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h4 class="card-title">Offer Details</h4>
+      <p><strong>Title:</strong> {{ offer.titre }}</p>
+      <p><strong>Description:</strong> {{ offer.description }}</p>
+      <p><strong>Date Published:</strong> {{ offer.datePublication | date: 'shortDate' }}</p>
+      <p><strong>Type:</strong> {{ offer.typeOffre }}</p>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h4 class="card-title">User Details</h4>
+      <p><strong>Name:</strong> {{ user.firstName }}</p>
+      <p><strong>Email:</strong> {{ user.lastName }}</p>
+      <h5>Resume:</h5>
+      <div *ngIf="resumeURI; else noResume">
+        <iframe [src]="resumeURI | safeUrl" width="100%" height="600px" frameborder="0"></iframe>
+      </div>
+      <ng-template #noResume>
+        <p>No resume available.</p>
+      </ng-template>
+
+      <label for="resumeUpload" class="btn btn-primary mt-3">Upload New Resume</label>
+      <input type="file" id="resumeUpload" style="display: none;" (change)="onFileSelected($event)" />
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-success" (click)="apply(offer.id)">Apply</button>
+</div>

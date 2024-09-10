@@ -1,0 +1,47 @@
+<!-- add-subject-test.component.html -->
+<div class="main_content_iner overly_inner">
+  <div class="container-fluid p-0">
+    <div class="row">
+      <div class="col-12">
+        <div class="white_card card_height_100 mb_30">
+          <div class="white_card_header">
+            <div class="box_header m-0">
+              <div class="main-title">
+                <h3 class="m-0">Add new test evaluation</h3>
+              </div>
+            </div>
+          </div>
+          <div class="white_card_body">
+            <form (ngSubmit)="addEvaluation()">
+              <div class="row">
+                <div class="col-lg-3">
+                  <select class="nice_Select2 nice_Select_line wide" [(ngModel)]="selectedTest" name="selectedTest" required>
+                    <option [ngValue]="null" disabled>Select test</option>
+                    <option *ngFor="let test of availableTests" [ngValue]="test">
+                      {{ test }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-lg-2">
+                  <div class="common_input mb_15">
+                    <input type="number" [(ngModel)]="evaluationNote" name="note" placeholder="Enter Note (0-1)" required min="0" max="1">
+                  </div>
+                </div>
+                <div class="col-12" *ngIf="errorMessage">
+                  <div class="alert alert-danger">
+                    {{ errorMessage }}
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="create_report_btn mt_30">
+                    <button type="submit" class="btn_1 radius_btn d-block text-center">Add Evaluation</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

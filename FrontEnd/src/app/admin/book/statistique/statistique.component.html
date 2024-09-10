@@ -1,0 +1,257 @@
+<div class="main_content_iner overly_inner ">
+    <div class="container-fluid p-0 ">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="page_title_left d-flex align-items-center">
+                        <h3 class="f_s_25 f_w_700 dark_text mr_30">Dashboard</h3>
+                        <ol class="breadcrumb page_bradcam mb-0">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+                            <li class="breadcrumb-item active">Analytic</li>
+                        </ol>
+                    </div>
+                    <div class="page_title_right">
+                        <div class="page_date_button d-flex align-items-center">
+                            <img src="img/icon/calender_icon.svg" alt>
+                            August 1, 2020 - August 31, 2020
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-xl-8 ">
+                <div class="white_card mb_30 card_height_100">
+                    <div class="white_card_header">
+                        <div class="row align-items-center justify-content-between flex-wrap">
+                            <div class="col-lg-4">
+                                <div class="main-title">
+                                    <h3 class="m-0">Reservation per month</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div id="chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 ">
+                <div class="white_card card_height_100 mb_30 user_crm_wrapper">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="single_crm">
+                                <div class="crm_head d-flex align-items-center justify-content-between">
+                                    <div class="thumb">
+                                        <img src="img/crm/businessman.svg" alt>
+                                    </div>
+                                    <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                                </div>
+                                <div class="crm_body">
+                                    <h4> {{ bookCount }}</h4>
+                                    <p>Total Books</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="single_crm ">
+                                <div
+                                    class="crm_head crm_bg_1 d-flex align-items-center justify-content-between">
+                                    <div class="thumb">
+                                        <img src="img/crm/customer.svg" alt>
+                                    </div>
+                                    <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                                </div>
+                                <div class="crm_body">
+                                    <h4>{{ reservedBooksCount }}</h4>
+                                    <p>Reserved Books</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="single_crm">
+                                <div
+                                    class="crm_head crm_bg_2 d-flex align-items-center justify-content-between">
+                                    <div class="thumb">
+                                        <img src="img/crm/infographic.svg" alt>
+                                    </div>
+                                    <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                                </div>
+                                <div class="crm_body">
+                                    <h4>{{ availableBooksCount }}</h4>
+                                    <p>Available Books</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="single_crm">
+                                <div
+                                    class="crm_head crm_bg_3 d-flex align-items-center justify-content-between">
+                                    <div class="thumb">
+                                        <img src="img/crm/sqr.svg" alt>
+                                    </div>
+                                    <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                                </div>
+                                <div class="crm_body">
+                                    <h4>{{nbRequestReturnBook}}</h4>
+                                    <p>Return Request </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="crm_reports_bnner">
+                        <div class="row justify-content-end ">
+                            <div class="col-lg-6">
+                                <h4>Create CRM Reports</h4>
+                                <p>Outlines keep you and honest
+                                    indulging honest.</p>
+                                <a href="#">Read More <i class="fas fa-arrow-right"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7">
+                <div class="white_card card_height_100 mb_20 ">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                                <h3 class="m-0">List reservation of today</h3>
+                            </div>
+                            <div class="header_more_tool">
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle" id="dropdownMenuButton"
+                                        data-bs-toggle="dropdown">
+                                        <i class="ti-more-alt"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right"
+                                        aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#"> <i class="ti-eye"></i> Action</a>
+                                        <a class="dropdown-item" href="#"> <i class="ti-trash"></i> Delete</a>
+                                        <a class="dropdown-item" href="#"> <i class="fas fa-edit"></i> Edit</a>
+                                        <a class="dropdown-item" href="#"> <i class="ti-printer"></i> Print</a>
+                                        <a class="dropdown-item" href="#"> <i class="fa fa-download"></i>
+                                            Download</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body QA_section">
+                        <div class="QA_table ">
+
+                            <table class="table lms_table_active2 p-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Student Name</th>
+                                        <th scope="col">Book Name</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">State</th>
+                                        <th scope="col">approved</th>
+                                        <th scope="col">returned By User</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <tr *ngFor="let today of reservationsToday">
+                                        <td>{{getUserNameBy(today.userId)}}</td>
+                                        <td class="f_s_12 f_w_400 color_text_6">{{ today.book?.title }}</td>
+                                        <td class="f_s_12 f_w_400 color_text_7">{{ getCategoryNameById(today.book!.categoryId) }}</td>
+                                        <td class="f_s_12 f_w_400 color_text_7">{{ today.book!.state ? 'Borrowed' : 'Available' }}</td>
+                                        <td class="f_s_12 f_w_400 color_text_6">
+                                            <span class="badge rounded-pill bg-warning">{{ today.approved ? 'YES' : 'NO'}}</span>
+                                        </td>
+                                        <td class="f_s_12 f_w_400 text-end">
+                                            <span class="badge rounded-pill bg-warning">{{ today.returned ? 'Yes' : 'No' }}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-5">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                                <h3 class="m-0">Reservation stastic</h3>
+                            </div>
+                            <div class="header_more_tool">
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle" id="dropdownMenuButton"
+                                        data-bs-toggle="dropdown">
+                                        <i class="ti-more-alt"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right"
+                                        aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#"> <i class="ti-eye"></i> Action</a>
+                                        <a class="dropdown-item" href="#"> <i class="ti-trash"></i> Delete</a>
+                                        <a class="dropdown-item" href="#"> <i class="fas fa-edit"></i> Edit</a>
+                                        <a class="dropdown-item" href="#"> <i class="ti-printer"></i> Print</a>
+                                        <a class="dropdown-item" href="#"> <i class="fa fa-download"></i>
+                                            Download</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div id="chart-currently">
+                            <div id="chart-currently">
+                                <apx-chart
+                                [series]="chartOptions.series"
+                                [chart]="chartOptions.chart"
+                                [labels]="chartOptions.labels"
+                                [colors]="chartOptions.colors"
+                                [legend]="chartOptions.legend"
+                                [dataLabels]="chartOptions.dataLabels"
+                                [plotOptions]="chartOptions.plotOptions"
+                                ></apx-chart>                                        
+                            </div>
+                        </div>
+                        <div class="monthly_plan_wraper">
+                            <div class="single_plan d-flex align-items-center justify-content-between">
+                                <div class="plan_left d-flex align-items-center">
+                                    <div class="thumb">
+                                        <img src="img/icon2/7.svg" alt>
+                                    </div>
+                                    <div>
+                                        <h5>Total Reservations: {{ nbTotalReservation }}</h5>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single_plan d-flex align-items-center justify-content-between">
+                                <div class="plan_left d-flex align-items-center">
+                                    <div class="thumb">
+                                        <img src="img/icon2/6.svg" alt>
+                                    </div>
+                                    <div>
+                                        <h5>Reservations Treated: {{ reservationTraite }}</h5>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single_plan d-flex align-items-center justify-content-between">
+                                <div class="plan_left d-flex align-items-center">
+                                    <div class="thumb">
+                                        <img src="img/icon2/5.svg" alt>
+                                    </div>
+                                    <div>
+                                        <h5>Reservations Not Treated: {{ reservationNonTraite }}</h5>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>

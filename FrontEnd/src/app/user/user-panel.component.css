@@ -1,0 +1,56 @@
+.menu-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f65365;
+    color: white;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .logo {
+    height: 50px;
+    margin-left: 10px;
+    margin-top:20px;
+  }
+  
+ 
+  
+  .custom_bootstrap_nav {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .custom_bootstrap_nav .nav-item {
+    margin: 0 15px;
+  }
+  
+  .custom_bootstrap_nav .nav-link {
+    color: black;
+    font-family: "arial", bold;
+    font-weight: lighter;
+    text-decoration: none;
+    text-align: center;
+    margin-top:20px;
+  }
+  
+  .custom_bootstrap_nav .nav-link:hover {
+    color: #f65365;
+  }
+  
+  .custom_bootstrap_nav .nav-link.active-link {
+    color: #f65365;
+  }
+  
+  .nav-item.disabled .nav-link {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  

@@ -1,0 +1,23 @@
+<div *ngIf="applications.length > 0; else noApplications" class="container my-4">
+  <h2 class="mb-3">My Applications</h2>
+  <ul class="list-group">
+    <li *ngFor="let application of applications" class="list-group-item">
+      <!-- Customize the display according to your ApplicationDTO structure -->
+      <p class="mb-1"><strong>Application ID:</strong> {{ application.id }}</p>
+      <p class="mb-1"><strong>Application Date:</strong> {{ application.applicationDate| date }}</p>
+      <p class="mb-1"><strong>Offer :</strong> {{ application.offerId  }}</p>
+      <div *ngIf="application.offerDetails">
+        <p class="mb-1"><strong>Offer Title:</strong> {{ application.offerDetails.titre }}</p>
+        <p class="mb-1"><strong>Offer Description:</strong> {{ application.offerDetails.description }}</p>
+        <p class="mb-1"><strong>Offer Type:</strong> {{ application.offerDetails.typeOffre }}</p>
+        <p class="mb-1"><strong>Offer Date Published:</strong> {{ application.offerDetails.datePublication | date }}</p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noApplications>
+  <div class="container my-4">
+    <p class="alert alert-warning">No applications found.</p>
+  </div>
+</ng-template>

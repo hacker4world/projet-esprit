@@ -1,0 +1,21 @@
+.description {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .card-text {
+    position: relative;
+  }
+  
+  .card-text:hover .description {
+    white-space: normal;
+    overflow: visible;
+  }
+  button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  

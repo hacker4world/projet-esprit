@@ -1,0 +1,166 @@
+<div class="row">
+  <div class="col-12">
+    <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+      <div class="page_title_left d-flex align-items-center">
+        <h3 class="f_s_25 f_w_700 dark_text mr_30">Dashboard</h3>
+        <ol class="breadcrumb page_bradcam mb-0">
+          <li class="breadcrumb-item active">User edit / list</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="white_card card_height_100 mb_30">
+      <div class="white_card_header">
+        <div class="box_header m-0">
+          <div class="main-title">
+            <h3 class="m-0">Form row</h3>
+          </div>
+        </div>
+      </div>
+      <div class="white_card_body">
+        <div class="card-body">
+          <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label class="form-label" for="firstName">First Name (user name)</label>
+                <input type="text" class="form-control" id="firstName" formControlName="firstName"
+                  placeholder="First Name">
+                <div *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched">
+                  First Name is required
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" formControlName="lastName"
+                  placeholder="Last Name">
+                <div *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">
+                  Last Name is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <input type="text" formControlName="email" class="form-control" placeholder="email">
+              <div *ngIf=" userForm.get('email')?.invalid && userForm.get('email')?.touched">
+                <div *ngIf="userForm.get('email')?.errors?.['required']">Last Name is required</div>
+                <small *ngIf="userForm.get('email')?.errors?.['email']"> must be at email format.</small>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label class="form-label" for="password">Password</label>
+                <input type="password" class="form-control" id="password" formControlName="password"
+                  placeholder="Password">
+                <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+                  Password must be at least 6 characters long
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="confirmPassword">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"
+                  placeholder="Confirm Password">
+                <div *ngIf="userForm.errors?.['mismatch'] && userForm.get('confirmPassword')?.touched">
+                  Passwords do not match
+                </div>
+              </div>
+            </div>
+            <div class="row  mb-3">
+              <div class="col">
+                  <label class="form-label" for="state">role</label>
+                  <select id="state" class="form-control" formControlName="role">
+                    <option value="">Choose...</option>
+                    <option value="STUDENT">STUDENT</option>
+                    <option value="PROFESSOR">PROFESSOR</option>
+                    <option value="ENTERPRISE">ENTERPRISE</option>
+                  </select>
+                  <div *ngIf="userForm.get('role')?.invalid && userForm.get('role')?.touched">
+                    State is required
+                  </div>
+                </div>
+                <div class="col" *ngIf="userForm.get('role')?.value === 'STUDENT'">
+                  <label class="form-label" for="state">Option</label>
+                  <select id="state" class="form-control" formControlName="userOption">
+                    <option value="">Choose...</option>
+                    <option value="DEVOPS">DEVOPS</option>
+                    <option value="GL">GL</option>
+                    <option value="CLOUD">CLOUD</option>
+                    <option value="BI">BI</option>
+                    <option value="TWIN">TWIN</option>
+                    <option value="MOBILE">MOBILE</option>
+                  </select>
+                  <div *ngIf="userForm.get('userOption')?.invalid && userForm.get('userOption')?.touched">
+                    State is required
+                  </div>
+                </div>
+          </div>
+            <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Sign in</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-lg-12">
+    <div class="white_card card_height_100 mb_30 pt-4">
+      <div class="white_card_body">
+        <div class="QA_section">
+          <div class="white_box_tittle list_header">
+            <h4>User List </h4>
+            <div class="box_right d-flex lms_block">
+              <div class="serach_field_2">
+                <div class="search_inner">
+                  <form Active="#">
+                    <div class="search_field">
+                      <input type="text" placeholder="Search content here..." name="search" [(ngModel)]="searchText"
+                        (input)="filterUsers()">
+                    </div>
+                    <button type="submit"> <i class="ti-search"></i> </button>
+                  </form>
+                </div>
+              </div>
+              <div class="add_button ms-2">
+                <a data-toggle="modal" data-target="#addcategory" class="btn_1" (click)="filterUsers()">search</a>
+              </div>
+            </div>
+          </div>
+          <div class=" mb_30">
+
+            <table class="QA_table table lms_table_active ">
+              <thead>
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">firstName</th>
+                  <th scope="col">lastName</th>
+                  <th scope="col">email</th>
+                  <th scope="col">createdDate</th>
+                  <th scope="col">updatedDate</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of users" [ngClass]="{ 'current-user': currentUserId === item.id}">
+                  <th scope="row"> <a class="question_content"> 1 </a></th>
+                  <td>{{item.firstName}}</td>
+                  <td>{{item.lastName}}</td>
+                  <td>{{item.email}}</td>
+                  <td>{{item.createdDate | date:'short'}}</td>
+                  <td>{{item.updatedDate | date:'short'}}</td>
+                  <td>{{item.role}}</td>
+                  <td>
+                    <a class="action_btn mr_10"> <i class="far fa-edit" (click)="onSelectUser(item.id,item)"></i> </a>
+                    <a class="action_btn"> <i class="fas fa-trash" (click)="onDeleteUser(item.id)"></i> </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

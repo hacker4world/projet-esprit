@@ -1,0 +1,145 @@
+<div class="main_content_iner overly_inner">
+  <div class="container-fluid p-0">
+    <div class="row">
+      <div class="col-12">
+        <div
+          class="page_title_box d-flex flex-wrap align-items-center justify-content-between"
+        >
+          <div class="page_title_left d-flex align-items-center">
+            <h3 class="f_s_25 f_w_700 dark_text mr_30">Entreprise</h3>
+            <ol class="breadcrumb page_bradcam mb-0">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0);">Créer une Offre</a>
+              </li>
+            </ol>
+          </div>
+          <div class="page_title_right">
+            <div class="page_date_button d-flex align-items-center">
+              <img src="assets/img/icon/calender_icon.svg" alt />
+            {{currentDate | date : "longDate"}}            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="white_card card_height_100 mb_30">
+          <div class="white_card_header">
+            <div class="box_header m-0">
+              <div class="main-title">
+                <h3 class="m-0">Créer une Offre</h3>
+              </div>
+            </div>
+          </div>
+          <div class="white_card_body">
+            <form [formGroup]="offerForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="common_input mb_15">
+                    <input
+                      type="text"
+                      formControlName="titre"
+                      placeholder="Titre"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="common_input mb_15">
+                    <input
+                      type="text"
+                      formControlName="description"
+                      placeholder="Description"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="common_input mb_15">
+                    <select
+                      formControlName="typeOffre"
+                      id="typeOffre"
+                      name="typeOffre"
+                      class="nice_Select2 nice_Select_line wide"
+                    >
+                      <option value="">Sélectionnez un type d'offre</option>
+                      <option value="EMPLOIE">Emploie</option>
+                      <option value="STAGE">Stage</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12 d-flex justify-content-end">
+                    <div class="btn-group" role="group" aria-label="Offer Buttons">
+                      <button type="submit" class="btn btn-primary">
+                        {{ editMode ? 'Modifier' : 'Ajouter' }}
+                      </button>
+                      <button type="button" class="btn btn-secondary ms-2" (click)="cancelEdit()">
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid p-0">
+    <div class="row"></div>
+    <div>
+      <table class="table table-striped table-hover mt-4">
+        <thead class="thead-dark">
+          <tr>
+            <th style="display: none;">ID</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Validté</th>
+            <th>Date Mis à jour</th>
+            <th>Date Publication</th>
+            <th>Available</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let offer of offers">
+            <td style="display: none;">{{ offer.id }}</td>
+            <td>{{ offer.titre }}</td>
+            <td>{{ offer.description }}</td>
+            <td>{{ offer.isStillAvailable? 'Oui' : 'Non' }}</td>
+            <td>{{ offer.dateMaj | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+            <td>{{ offer.datePublication | date : "shortDate" }}</td>
+            <td>
+                <label class="switch">
+                  <input type="checkbox" [checked]="offer.isStillAvailable" (change)="toggleIsValid(offer)">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            <td>
+              <button
+                class="btn btn-sm btn-primary me-2"
+                (click)="editOffer(offer)"
+              >
+                <i class="fas fa-edit"></i>
+              </button>
+              <button
+                class="btn btn-sm btn-danger me-2"
+                (click)="deleteOffer(offer.id)"
+              >
+                <i class="fas fa-trash-alt"></i>
+              </button>
+              <button
+              class="btn btn-sm btn-info me-2"
+              (click)="viewApplications(offer.id)"
+              data-bs-toggle="tooltip" 
+              data-bs-placement="top" 
+              title="Applications reliés"
+            >
+              <i class="fas fa-eye"></i>
+            </button>
+            </td>
+           
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

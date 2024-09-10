@@ -1,0 +1,129 @@
+<div class="main_content_iner overly_inner ">
+    <div class="container-fluid p-0 ">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="page_title_left d-flex align-items-center">
+                        <h3 class="f_s_25 f_w_700 dark_text mr_30">Dashboard</h3>
+                        <ol class="breadcrumb page_bradcam mb-0">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+                            <li class="breadcrumb-item active">Analytic</li>
+                        </ol>
+                    </div>
+                    <div class="page_title_right">
+                        <div class="page_date_button d-flex align-items-center">
+                            <img src="img/icon/calender_icon.svg" alt>
+                            August 1, 2020 - August 31, 2020
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30 pt-4">
+                    <div class="white_card_body">
+                        <div class="QA_section">
+                            <div class="white_box_tittle list_header">
+                                <button class="btn btn-primary" (click)="openAddModal()">Add Category</button>
+                                <div class="box_right d-flex lms_block">
+                                    <div class="serach_field_2">
+                                        <div class="search_inner">
+                                            <form Active="#">
+                                                <div class="search_field">
+                                                    <input type="text" placeholder="Search content here...">
+                                                </div>
+                                                <button type="submit"> <i class="ti-search"></i> </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="add_button ms-2">
+                                        <a href="#" data-toggle="modal" data-target="#addcategory"
+                                            class="btn_1">search</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="QA_table mb_30">
+
+                                <table class="table lms_table_active ">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        <tr *ngFor="let category of categories">
+                                            <td>{{ category.categoryName }}</td>
+                                            <td>{{ category.description }}</td>
+                                            <td>
+                                                <div class="action_btns d-flex">
+                                                    <a class="action_btn mr_10" (click)="openEditModal(category)">
+                                                        <i class="far fa-edit"></i>
+                                                    </a>
+                                                    <a class="action_btn" (click)="deleteCategory(category)">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Category Modal -->
+<div *ngIf="isModalOpen" class="modal fade show d-block" tabindex="-1" role="dialog"
+    aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="categoryModalLabel">{{ selectedCategory ? 'Edit Category' : 'Add Category'
+                    }}</h5>
+                <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()">
+                <div class="modal-body">
+
+                    
+                        
+                        <div class="common_input mb_15">
+                        <input id="categoryName" placeholder="Category name" formControlName="categoryName" class="form-control"
+                            [ngClass]="{ 'is-invalid': categoryForm.get('categoryName')?.invalid && categoryForm.get('categoryName')?.touched }" />
+                        
+                        <div class="invalid-feedback"
+                            *ngIf="categoryForm.get('categoryName')?.invalid && categoryForm.get('categoryName')?.touched">
+                            Category name is required
+                        </div>
+                    </div>
+                    
+                    <div class="common_input mb_15">
+                        
+                        <textarea id="description" placeholder="description" formControlName="description" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

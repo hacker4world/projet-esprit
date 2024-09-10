@@ -1,0 +1,106 @@
+.hovered {
+  background-color: #8353b0;
+}
+
+.current-user {
+  background-color: #d1e7dd;
+}
+.action-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.action-table th {
+  background-color: #f8f9fa;
+  text-align: left;
+  padding: 8px;
+}
+
+.action-table td {
+  text-align: center;
+  padding: 8px;
+}
+
+.action-button {
+  background-color: #e0f2ff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.action-button .icon {
+  font-size: 18px;
+  color: #007bff;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.pagination button {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.pagination span {
+  margin: 0 8px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+  /* Spacing between buttons */
+}
+
+.delete-button {
+  background-color: #ffe5e5;
+  /* Light pink background */
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.delete-button:hover {
+  background-color: #ffcccc;
+  /* Darker pink on hover */
+}
+
+.icon-trash {
+  background: url('/assets/trash-icon.svg') no-repeat center center;
+  background-size: 20px 20px;
+  /* Adjust the size as needed */
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.delete-button:before {
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background-color: #ffe5e5;
+  border-radius: 50%;
+}

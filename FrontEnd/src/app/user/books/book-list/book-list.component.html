@@ -1,0 +1,72 @@
+<div class="main_content_iner overly_inner " style="width: 80%;margin-left: 10%;">
+    <div class="container-fluid p-0 ">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex align-items-center justify-content-between">
+                    <div class="page_title_left">
+                        <h3 class="f_s_30 f_w_700 dark_text">List of Book</h3>
+
+                    </div>
+                    <div class="col-xl-4 col-lg-6 ">
+                        <label class="form-label" for="#" >Select Category</label>
+                        <div class="common_select">
+                            <select class="form-select" [(ngModel)]="selectedCategoryId" (change)="getBooksByCategory()" >
+                                <option [ngValue]="-1">    All Categories</option>
+                                <option *ngFor="let category of categories" [value]="category.id">{{ category.categoryName }}</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3" *ngFor="let book of books">
+                <div class="white_card position-relative mb_20 ">
+                    <div class="card-body">
+
+                        <div class="ribbon1 rib1-primary"><span class="text-white text-center rib1-primary"
+                                *ngIf="book.remainingDays !== null ">{{ book.remainingDays }}</span>
+                        </div>
+                        <div class="ribbon1 rib1-primary"><span class="text-white text-center rib1-primary"
+                                *ngIf="book.remainingDays === undefined || book.isReturned || !book.isApproved">Not reserved</span></div>
+                        <img [src]="'assets/img/' + book.imageUrl" alt class="d-block mx-auto my-4" height="150">
+                        <div class="row my-4">
+                            <div class="col"><span class="badge_btn_3  mb-1">{{ getCategoryNameById(book.categoryId) }}
+                                </span> <a href="#" class="f_w_400 color_text_3 f_s_14 d-block">{{ book.author }}</a>
+                            </div>
+                            <span class="badge bg-success position-absolute top-0 start-0 m-2" *ngIf="book.recommended">recomended</span>
+                            <div class="col-auto">
+                                <h4 class="text-dark mt-0">{{ book.title }} <small class="text-muted font-14"
+                                        *ngIf="!book.isReturned">{{ book.endDate }} {{book.isApproved}}</small></h4>
+                                <ul class="list-inline mb-0 product-review align-self-center">
+                                    <li class="list-inline-item"><i class="fas fa-star text-warning font-16"></i></li>
+                                    <li class="list-inline-item"><i class="fas fa-star text-warning font-16 ms -n2"></i>
+                                    </li>
+                                    <li class="list-inline-item"><i class="fas fa-star text-warning font-16 ms -n2"></i>
+                                    </li>
+                                    <li class="list-inline-item"><i class="fas fa-star text-warning font-16 ms -n2"></i>
+                                    </li>
+                                    <li class="list-inline-item"><i
+                                            class="fas fa-star-half text-warning font-16 ms -n2"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn_2" (click)="showBookDetails(book.id)">Plus de détails</button>
+                        </div><br>
+                        <div class="d-grid" *ngIf="!book.state; else reservedMessage">
+                            <button class="btn_2" style="background-color: #f65365;color:white"
+                                (click)="reserveBookDetail(book.id)">Réserver</button>
+                        </div>
+                        <ng-template #reservedMessage>
+                            <span class="badge bg-success position-absolute top-0 start-0 m-2">Book reserved</span>
+                        </ng-template>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

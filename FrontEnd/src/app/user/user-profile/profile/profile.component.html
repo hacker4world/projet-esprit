@@ -1,0 +1,177 @@
+<div class="main_content_iner overly_inner ">
+    <div class="container-fluid p-0 ">
+
+
+        <div class="row ">
+            <div class="col-xl-4">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                                <h3 class="m-0">Member request
+                                    to mail.</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="user-profile">
+                            <div class="profile-image-container mb-3">
+                              <img id="user-image" src="" alt="User Image">
+                              <div class="profile-image-overlay hidden">
+                                <input type="file" #fileInput (change)="onFileChange($event)" accept="image/*" style="display: none;">
+                                <button class="btn btn-sm btn-primary edit-button" (click)="openFileDialog()">Edit</button>
+                              </div>
+                            </div>
+                          </div>
+                        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+                            <div class="form-group mb-3">
+                              <input type="text" formControlName="firstName" class="form-control" placeholder="First Name">
+                              <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched">
+                                <div *ngIf="registerForm?.get('firstName')?.errors?.['required']">First Name is required</div>
+                                <small *ngIf="registerForm.get('firstName')?.errors?.['minlength']">username must be at least 3 characters.</small>
+                              </div>
+                            </div>
+                            <div class="form-group mb-3">
+                              <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
+                              <div *ngIf=" registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched">
+                                <div *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name is required</div>
+                                <small *ngIf="registerForm.get('lastName')?.errors?.['minLength']">lastName must be at least 3 characters.</small>
+                              </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" formControlName="email" class="form-control" placeholder="email">
+                                <div *ngIf=" registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+                                  <div *ngIf="registerForm.get('email')?.errors?.['required']">Last Name is required</div>
+                                  <small *ngIf="registerForm.get('email')?.errors?.['email']"> must be at email format.</small>
+                                </div>
+                              </div>
+                            <div class="form-group mb-3">
+                              <input type="password" formControlName="password" class="form-control" placeholder="Password">
+                              <div *ngIf=" registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                                <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</div>
+                                <div *ngIf="registerForm.get('password')?.errors?.['minLength']">Password must be at least 6
+                                  characters</div>
+                              </div>
+                            </div>
+                            <div class="form-group mb-3">
+                              <input type="password" formControlName="confirmPassword" class="form-control"
+                                placeholder="Confirm Password">
+                              <div *ngIf=" registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+                                <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm Password is
+                                  required</div>
+                                <div *ngIf="registerForm.get('confirmPassword')?.errors?.['mismatch']">Passwords must match
+                                </div>
+                              </div>
+                            </div>
+                            <button class="btn btn-sm btn-primary add_button" (click)="saveUser()">save</button>
+                          </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="white_card card_height_100 mb_20 ">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                                <h3 class="m-0">resume Details</h3>
+                            </div>
+                            <div class="header_more_tool">
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                        <i class="ti-more-alt"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#"> <i class="ti-eye"></i> Action</a>
+                                        <a class="dropdown-item" href="#"> <i class="ti-trash"></i> Delete</a>
+                                        <a class="dropdown-item" href="#"> <i class="fas fa-edit"></i> Edit</a>
+                                        <a class="dropdown-item" href="#"> <i class="ti-printer"></i> Print</a>
+                                        <a class="dropdown-item" href="#"> <i class="fa fa-download"></i> Download</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="user-profile">
+                            <div class="profile-document-container mb-3">
+                                <div class="selected-file-name" *ngIf="selectedFile">
+                                  {{ selectedFile.name }}
+                                </div>
+                                <div class="placeholder-text" *ngIf="!selectedFile">
+                                    Enter your file (cv)
+                                  </div>
+                                <div class="profile-document-overlay hidden" (click)="openPdfDialog()">
+                                  <input type="file" #pdfInput (change)="onPdfChange($event)"  style="display: none;">
+
+                                  <button type="button" class="btn btn-secondary" >Edit</button>
+                                </div>
+                              </div>
+
+                          </div>
+                          <form [formGroup]="resumeForm" (ngSubmit)="onSubmitSaveResume()">
+                            <div class="form-group">
+                              <label for="email">Email Address</label>
+                              <input type="email" class="form-control" id="email" formControlName="email" required>
+                              <div *ngIf="resumeForm.get('email')?.invalid && (resumeForm.get('email')?.touched || resumeForm.get('email')?.dirty)">
+                                <div *ngIf="resumeForm.get('email')?.errors?.['required']">Email is required.</div>
+                                <div *ngIf="resumeForm.get('email')?.errors?.['email']">Invalid email format.</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="dateOfBirth">Date of Birth</label>
+                              <input type="date" class="form-control" id="dateOfBirth" formControlName="dateOfBirth" required>
+                              <div *ngIf="resumeForm.get('dateOfBirth')?.invalid && (resumeForm.get('dateOfBirth')?.touched || resumeForm.get('dateOfBirth')?.dirty)">
+                                <div *ngIf="resumeForm.get('dateOfBirth')?.errors?.['required']">Date of Birth is required.</div>
+                                <div *ngIf="resumeForm.get('dateOfBirth')?.errors?.['minlength']">Minimum length is 3 characters.</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="education">Education</label>
+                              <input type="text" class="form-control" id="education" formControlName="education" required>
+                              <div *ngIf="resumeForm.get('education')?.invalid && (resumeForm.get('education')?.touched || resumeForm.get('education')?.dirty)">
+                                <div *ngIf="resumeForm.get('education')?.errors?.['required']">Education is required.</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="experience">Experience</label>
+                              <input type="text" class="form-control" id="experience" formControlName="experience" required>
+                              <div *ngIf="resumeForm.get('experience')?.invalid && (resumeForm.get('experience')?.touched || resumeForm.get('experience')?.dirty)">
+                                <div *ngIf="resumeForm.get('experience')?.errors?.['required']">Experience is required.</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="skils">Skills</label>
+                              <input type="text" class="form-control" id="skils" formControlName="skils" required>
+                              <div *ngIf="resumeForm.get('skils')?.invalid && (resumeForm.get('skils')?.touched || resumeForm.get('skils')?.dirty)">
+                                <div *ngIf="resumeForm.get('skils')?.errors?.['required']">Skills are required.</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="langue">Language</label>
+                              <input type="text" class="form-control" id="langue" formControlName="langue" required>
+                              <div *ngIf="resumeForm.get('langue')?.invalid && (resumeForm.get('langue')?.touched || resumeForm.get('langue')?.dirty)">
+                                <div *ngIf="resumeForm.get('langue')?.errors?.['required']">Language is required.</div>
+                              </div>
+                            </div>
+                            <button class="btn btn-sm btn-primary add_button" (click)="saveResume()">save</button>
+                          </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="white_card card_height_100 mb_30">
+                    <div>
+                        <div>
+                           <app-test-res></app-test-res>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

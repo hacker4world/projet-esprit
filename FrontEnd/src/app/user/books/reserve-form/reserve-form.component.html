@@ -1,0 +1,110 @@
+<div class="main_content_iner overly_inner">
+    <div class="container-fluid p-0 ">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex align-items-center justify-content-between">
+                    <div class="page_title_left">
+                        <h3 class="f_s_30 f_w_700 dark_text">Validate Your reservation</h3>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="white_card">
+                    <div class="white_card_header border_bottom_1px">
+                        <h4 class="card-title mb-0">Book Information </h4>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive shopping-cart">
+                            <table class="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="border-top-0">Name Book</th>
+                                        <th class="border-top-0">Author</th>
+                                        <th class="border-top-0">Category Book</th>
+                                        <th class="border-top-0">Nb de pages</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngIf="book">
+                                        <td>
+                                            <img [src]="'assets/img/' + book!.imageUrl" alt height="52" />
+                                            <p
+                                                class="d-inline-block align-middle mb-0 product-name f_s_16 f_w_600 color_theme2">
+                                                {{ book!.title }}</p>
+                                        </td>
+                                        <td>{{ book!.author }}</td>
+                                        <td *ngIf="category">{{ category.categoryName }}</td>
+                                        <td>{{ book!.nbPage }}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+                <div class="white_card">
+
+                    <div class="white_card_header border_bottom_1px">
+                        <h4 class="card-title mb-0">Validate Reservation Book</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <form [formGroup]="reserveForm" (ngSubmit)="onSubmit()">
+                            <div class="row mb-3">
+                                <label class="form-label col-xl-3 col-lg-3 col-form-label">Reason</label>
+                                <div class="col-lg-9 col-xl-8"><textarea class="form-control" rows="3"
+                                        formControlName="reason"></textarea></div>
+
+                            </div>
+                            <div class="alert alert-danger" role="alert" style="width: 65.5%;left:26%"
+                                *ngIf="reserveForm.controls['reason'].invalid && (reserveForm.controls['reason'].dirty || reserveForm.controls['reason'].touched)">
+                                <div class="text-danger"
+                                    *ngIf="reserveForm.controls['reason'].errors?.['required']">Reason is
+                                    required.</div>
+                                <div class="text-danger"
+                                    *ngIf="reserveForm.controls['reason'].errors?.['minlength']">Reason must be at
+                                    least 10 characters.</div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="form-label col-xl-3 col-lg-3 col-form-label">End Date</label>
+                                <div class="col-lg-9 col-xl-8"><input class="form-control" type="date"
+                                        formControlName="endDate" /></div>
+
+                            </div>
+                            <div *ngIf="reserveForm.get('endDate')!.invalid && (reserveForm.get('endDate')?.dirty || reserveForm.get('endDate')?.touched)"
+                                class="alert alert-danger" role="alert" style="width: 65.5%;left:26%">
+                                <div class="text-danger" *ngIf="reserveForm.get('endDate')?.hasError('required')">End Date is required.
+                                </div>
+                                <div class="text-danger" *ngIf="reserveForm.get('endDate')?.hasError('endDateInvalid')">End Date must be
+                                    after today.</div>
+                                <div class="text-danger" *ngIf="reserveForm.get('endDate')?.hasError('maxReservationPeriodExceeded')">
+                                    Reservation period exceeded. Please adjust the date.</div>
+                            </div>
+                            <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+                            <button type="submit" [disabled]="!reserveForm.valid"  class="btn_1 mt-1 mb-1 w-100">Confirm
+                                your book</button>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>

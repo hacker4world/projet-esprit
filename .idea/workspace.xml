@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fe399795-9226-4fbf-b8ad-9936c4eda3ad" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/dto/AssociatifsDTOs/ClubDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/dto/AssociatifsDTOs/ClubDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/dto/AssociatifsDTOs/ClubEventDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/dto/AssociatifsDTOs/ClubEventDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/dto/AssociatifsDTOs/ClubMemberDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/dto/AssociatifsDTOs/ClubMemberDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/dto/AssociatifsDTOs/EventRegisterDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/dto/AssociatifsDTOs/EventRegisterDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/dto/AssociatifsDTOs/RoomReservationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/dto/AssociatifsDTOs/RoomReservationDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/AssociatifsEntity/Club.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/AssociatifsEntity/Club.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/AssociatifsEntity/ClubMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/AssociatifsEntity/ClubMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/AssociatifsEntity/EventRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/AssociatifsEntity/EventRegister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/AssociatifsEntity/EventType.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/AssociatifsEntity/EventType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/AssociatifsEntity/RoleMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/AssociatifsEntity/RoleMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/AssociatifsEntity/RoomReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/AssociatifsEntity/RoomReservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/entitys/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/mapper/AssociatifsMapper/ClubEventMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/mapper/AssociatifsMapper/ClubEventMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/mapper/AssociatifsMapper/ClubMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/mapper/AssociatifsMapper/ClubMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/mapper/AssociatifsMapper/ClubMemberMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/mapper/AssociatifsMapper/ClubMemberMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/mapper/AssociatifsMapper/EventRegisterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/mapper/AssociatifsMapper/EventRegisterMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/mapper/AssociatifsMapper/RoomReservationMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/mapper/AssociatifsMapper/RoomReservationMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/repositorys/AssociatifsRepo/EventRegisterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/repositorys/AssociatifsRepo/EventRegisterRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/repositorys/AssociatifsRepo/RoomReservationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/repositorys/AssociatifsRepo/RoomReservationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/services/AssociatifsServices/RoomReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/services/AssociatifsServices/RoomReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/services/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/services/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/services/iservices/AssociatifsIServices/IRoomReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/futurbe/services/iservices/AssociatifsIServices/IRoomReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FrontEnd/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/FrontEnd/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2h08SvduqKBcBsGWieOlv3gBTAO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mega-PC/Desktop/FuturEprit/BackEnd&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fe399795-9226-4fbf-b8ad-9936c4eda3ad" name="Changes" comment="" />
+      <created>1716719639531</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716719639531</updated>
+      <workItem from="1716719643060" duration="255000" />
+      <workItem from="1717249327659" duration="845000" />
+      <workItem from="1719947961807" duration="10000" />
+      <workItem from="1719947996321" duration="2000" />
+      <workItem from="1725549311747" duration="77000" />
+      <workItem from="1725550515458" duration="211000" />
+      <workItem from="1725550921596" duration="75000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

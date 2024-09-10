@@ -1,0 +1,24 @@
+<div class="container my-4">
+    <h2 class="mb-3">Applications pour l'offre: {{ offer.titre }}</h2>
+    <div *ngIf="applications.length > 0; else noApplications">
+      <ul class="list-group">
+        <li *ngFor="let application of applications" class="list-group-item">
+          <p style="display: none;"><strong>Application ID:</strong> {{ application.id }}</p>
+          <p><strong>Application Date:</strong> {{ application.applicationDate | date }}</p>
+          <p><strong>User ID:</strong> {{ application.userId }}</p>
+          <div *ngIf="users[application.userId]">
+            <p><strong>User Name:</strong> {{ users[application.userId].firstName }}</p>
+            <p><strong>User Email:</strong> {{ users[application.userId].email }}</p>
+            <!-- Add more user details as needed -->
+          </div>
+          <div *ngIf="!application.is_viewed">
+            <button class="btn btn-primary" (click)="markApplicationViewed(application)">Mark as Viewed</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noApplications>
+      <p>No applications found.</p>
+    </ng-template>
+  </div>
+  

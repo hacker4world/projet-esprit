@@ -1,0 +1,8 @@
+/* Add this to user-list.component.css */
+.hovered {
+  background-color: #8353b0; /* Lighter version of #67349d */
+}
+
+.current-user {
+  background-color: #d1e7dd; /* Adjust to your preferred current user color */
+}

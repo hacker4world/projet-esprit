@@ -1,0 +1,50 @@
+<div class="main_content_iner overly_inner ">
+  <div class="container-fluid p-0 ">
+    <div class="row">
+      <div class="col-12">
+        <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+          <div class="page_title_left d-flex align-items-center">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="white_card card_height_100 mb_30">
+          <div class="white_card_header">
+            <div class="box_header m-0">
+              <div class="main-title">
+                <h3 class="m-0">Add New Classroom</h3>
+              </div>
+            </div>
+          </div>
+          <div class="white_card_body">
+            <form [formGroup]="classroomForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="common_input mb_15">
+                    <input type="text" placeholder="Group Name" formControlName="groupName">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="common_input mb_15">
+                    <select class="nice_Select2 nice_Select_line wide" formControlName="level">
+                      <option value="">Select Level</option>
+                      <option *ngFor="let level of levels" [value]="level">{{ level }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="create_report_btn mt_30">
+                    <button type="submit" class="btn_1 radius_btn d-block text-center">Add Classroom</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

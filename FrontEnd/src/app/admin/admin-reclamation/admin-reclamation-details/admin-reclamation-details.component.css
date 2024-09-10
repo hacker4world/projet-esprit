@@ -1,0 +1,91 @@
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+/* Add your custom styles here */
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gray_card {
+  background-color: #f9f9f9;
+}
+
+.mb_30 {
+  margin-bottom: 30px;
+}
+
+.pt-4 {
+  padding-top: 1.5rem;
+}
+
+.white_card_body {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.white_box_tittle {
+  background-color: #fff;
+  padding: 15px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.list_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  border-radius: 4px;
+}
+
+.parpel_bg {
+  background-color: #6f42c1;
+}
+
+.text_white {
+  color: #fff;
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.rounded-circle {
+  border-radius: 50%;
+}
+
+.me-2 {
+  margin-right: 0.5rem;
+}
+
+.box_right {
+  display: flex;
+}
+
+.lms_block {
+  margin-right: 20px;
+}
+.card-opacity {
+  opacity: 0.5;
+
+}

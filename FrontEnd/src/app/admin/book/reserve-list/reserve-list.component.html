@@ -1,0 +1,116 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                <div class="page_title_left d-flex align-items-center">
+                    <h3 class="f_s_25 f_w_700 dark_text mr_30">Dashboard</h3>
+                    <ol class="breadcrumb page_bradcam mb-0">
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+                        <li class="breadcrumb-item active">Analytic</li>
+                    </ol>
+                </div>
+                <div class="page_title_right">
+                    <div class="page_date_button d-flex align-items-center">
+                        <img src="img/icon/calender_icon.svg" alt>
+                        August 1, 2020 - August 31, 2020
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="white_card card_height_100 mb_30 pt-4">
+                <div class="white_card_body">
+                    <div class="QA_section">
+                        <div class="white_box_tittle list_header">
+                            
+                            <div class="box_right d-flex lms_block">
+                                <div class="serach_field_2">
+                                    <div class="search_inner">
+                                        <form >
+                                            <div class="search_field">
+                                                <input type="text" placeholder="Search content here..."
+                                                    formControlName="title">
+                                            </div>
+                                            <button type="submit"> <i class="ti-search"></i> </button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="QA_table mb_30">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Student Name</th>
+                                        <th>Title</th>
+                                        
+                                        <th>Number of Pages</th>
+                                        <th>Category</th>
+                                        <th>Image</th>
+                                        <th>Approved</th>
+                                        <th>Returned </th>
+                                        
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let reservation of reservations">
+                                        <td>{{ getUserNameBy(reservation.userId) }}</td>
+                                        <td>{{ reservation.book?.title }}</td>
+                                        
+                                        <td>{{ reservation.book?.nbPage }}</td>
+                                        <td>{{ getCategoryNameById(reservation.book!.categoryId) }}</td>
+                                        <td><img [src]="'assets/img/' + reservation.book?.imageUrl" alt="Book Image"
+                                                style="max-width: 80px; height: auto;"></td>
+                                       
+                                        
+                                        <td>
+                                            <span class="badge rounded-pill bg-warning">{{ reservation.approved ? 'YES' : 'NO'}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-warning">{{ reservation.returned
+ ?
+                                                'Yes' : 'No' }}</span>
+                                        </td>
+                                        
+                                        <td>
+                                            <div class="action_btns d-flex">
+                                                <button *ngIf="!reservation.approved && !reservation.returned && !reservation.requestReturn" type="button" (click)="acceptReservation(reservation.id)" class="btn btn-success mb-3">Accepter</button>
+                                                <button *ngIf="!reservation.approved && !reservation.returned && !reservation.requestReturn" type="button" class="btn btn-danger mb-3" (click)="refuseBook(reservation)">Refuser</button>
+                                                <button *ngIf="reservation.approved && !reservation.returned && !reservation.requestReturn" type="button" class="btn btn-info mb-3">Déja Reservé</button>
+                                                <button *ngIf="reservation.approved && reservation.requestReturn && !reservation.returned" type="button" class="btn btn-warning mb-3"(click)="acceptReturnBook(reservation.id)">Accepter return</button>
+                                                <button *ngIf="reservation.approved && reservation.requestReturn && reservation.returned" type="button" class="btn btn-primary mb-3">Returned</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<style>
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .modal {
+        display: block;
+    }
+</style>

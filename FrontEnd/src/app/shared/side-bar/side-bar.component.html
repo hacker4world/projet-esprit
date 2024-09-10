@@ -1,0 +1,154 @@
+<!-- admin pannel config  -->
+<nav class="sidebar">
+  <div class="logo d-flex justify-content-between">
+    <a class="large_logo" href="index-2.html"
+      ><img src="../assets/img/logo_esprit.png" alt
+    /></a>
+    <a class="small_logo" href="index-2.html"
+      ><img src="../assets/img/logo_esprit.png" alt
+    /></a>
+    <div class="sidebar_close_icon d-lg-none">
+      <i class="ti-close"></i>
+    </div>
+  </div>
+  <ul id="sidebar_menu" *ngIf="currentUser.role!='LIBRARY_MANAGER'">
+    <li class>
+      <a class="has-arrow" href="#" aria-expanded="false">
+        <div class="nav_icon_small">
+          <img src="../assets/img/menu-icon/dashboard.svg" alt />
+        </div>
+        <div class="nav_title">
+          <span>User Management </span>
+        </div>
+      </a>
+      <ul>
+        <li><a [routerLink]="['user-manager/users-stats']">users stats</a></li>
+        <li><a [routerLink]="['user-manager/users-list']">users</a></li>
+      </ul>
+    </li>
+  </ul>
+  <ul id="sidebar_menu" *ngIf="currentUser.role!='LIBRARY_MANAGER'">
+    <li class>
+      <a class="has-arrow" href="#" aria-expanded="false">
+        <div class="nav_icon_small">
+          <img src="../assets/img/menu-icon/dashboard.svg" alt />
+        </div>
+        <div class="nav_title">
+          <span>Offres </span>
+        </div>
+      </a>
+      <ul>
+        <li>
+          <a [routerLink]="['offer-manager/create-offer']">Créer Offre</a>
+        </li>
+        <li><a href="index_3.html">Liste des offres</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul id="sidebar_menu" *ngIf="currentUser.role!='LIBRARY_MANAGER'">
+    <li class>
+      <a class="has-arrow" href="#" aria-expanded="false">
+        <div class="nav_icon_small">
+          <img src="../assets/img/menu-icon/11.svg" alt />
+        </div>
+        <div class="nav_title">
+          <span>Documents</span>
+        </div>
+      </a>
+      <ul>
+        <li>
+          <a [routerLink]="['document-manager/document-list']"
+            >List Documents</a
+          >
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul id="sidebar_menu" *ngIf="currentUser.role!='LIBRARY_MANAGER'">
+    <li class>
+      <a class="has-arrow" href="#" aria-expanded="false" [routerLink]="['admin-classroom']">
+        <div class="nav_icon_small">
+          <img src="../assets/img/menu-icon/dashboard.svg" alt />
+        </div>
+        <div class="nav_title">
+          <span>Class Rooms</span>
+        </div>
+      </a>
+    </li>
+  </ul>
+
+  <ul id="sidebar_menu" *ngIf="currentUser.role!='LIBRARY_MANAGER'">
+    <li class>
+      <a class="has-arrow" href="#" aria-expanded="false">
+        <div class="nav_icon_small">
+          <img src="../assets/img/menu-icon/dashboard.svg" alt />
+        </div>
+        <div class="nav_title">
+          <span>Reclamations</span>
+        </div>
+      </a>
+      <ul>
+        <li><a [routerLink]="['admin-reclamation']">All List</a></li>
+      </ul>
+    </li>
+  </ul>
+  <ul id="sidebar_menu" *ngIf="currentUser.role =='LIBRARY_MANAGER'">
+    <li class>
+      <a class="has-arrow" [routerLink]="['/api/dashboard/admin/book/statistiques']" aria-expanded="false">
+        <div class="nav_icon_small">
+          <img src="../assets/img/menu-icon/dashboard.svg" alt />
+        </div>
+        <div class="nav_title">
+          <span>statistics</span>
+        </div>
+      </a>
+      
+    </li>
+    <li class>
+      <a class="has-arrow" [routerLink]="['/api/dashboard/admin/book/categories']" aria-expanded="false">
+        <div class="nav_icon_small">
+          <img src="../assets/img/menu-icon/dashboard.svg" alt />
+        </div>
+        <div class="nav_title">
+          <span>Category Management </span>
+        </div>
+      </a>
+      
+    </li>
+    <li class>
+      <a class="has-arrow" [routerLink]="['/api/dashboard/admin/book/books']" aria-expanded="false">
+        <div class="nav_icon_small">
+          <img src="../assets/img/menu-icon/dashboard.svg" alt />
+        </div>
+        <div class="nav_title">
+          <span>Book Management </span>
+        </div>
+      </a>
+      
+    </li>
+    <li class>
+      <a class="has-arrow" [routerLink]="['/api/dashboard/admin/book/reservations']" aria-expanded="false">
+        <div class="nav_icon_small">
+          <img src="../assets/img/menu-icon/dashboard.svg" alt />
+        </div>
+        <div class="nav_title">
+          <span>List Reservation Book</span>
+        </div>
+      </a>
+      
+    </li>
+    <li class>
+      <a class="has-arrow" [routerLink]="['/api/dashboard/admin/book/archives']" aria-expanded="false">
+        <div class="nav_icon_small">
+          <img src="../assets/img/menu-icon/dashboard.svg" alt />
+        </div>
+        <div class="nav_title">
+          <span>List Archives Reservation</span>
+        </div>
+      </a>
+      
+    </li>
+  </ul>
+</nav>

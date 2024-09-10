@@ -1,0 +1,183 @@
+<!-- KPI Section -->
+<div class="row">
+  <div class="col-sm-6 col-lg-3">
+    <div class="white_card card_height_100 mb_30">
+      <div class="white_card_body">
+        <div class="text-center">
+          <h5>Total documents</h5>
+          <h2>{{ totalDocuments }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="white_card card_height_100 mb_30">
+      <div class="white_card_body">
+        <div class="text-center">
+          <h5>Documents pending</h5>
+          <h2>{{ pendingDocuments }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="white_card card_height_100 mb_30">
+      <div class="white_card_body">
+        <div class="text-center">
+          <h5>Documents in progress</h5>
+          <h2>{{ inProgressDocument }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-lg-3">
+    <div class="white_card card_height_100 mb_30">
+      <div class="white_card_body">
+        <div class="text-center">
+          <h5>Documents resolved</h5>
+          <h2>{{ resolvedDocuments }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End KPI Section -->
+
+<div class="col-lg-12">
+  <div class="white_card card_height_100 mb_30 pt-4">
+    <div class="white_card_body">
+      <div class="QA_section">
+        <div class="white_box_tittle list_header">
+          <h4>List of document requests</h4>
+          <div class="box_right d-flex lms_block">
+            <div class="serach_field_2 ms-2">
+              <select id="state" (change)="filterStatus($event)" class="ms-2">
+                <option value="">Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Completed">Completed</option>
+              </select>
+              <select id="state" (change)="filterType($event)" class="ms-2">
+                <option value="">Type</option>
+                <option value="diploma">Diploma</option>
+                <option value="transcript">Transcript</option>
+                <option value="studentCard">StudentCard</option>
+                <option value="attendanceCertificate">
+                  AttendanceCertificate
+                </option>
+              </select>
+              <button
+                type="button"
+                class="btn btn-primary ms-2"
+                (click)="navigateToNewDocument()"
+              >
+                <i class="ti-plus"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="mb_30">
+          <table class="QA_table table lms_table_active">
+            <thead>
+              <tr>
+                <th scope="col">Created the</th>
+                <th scope="col">Type</th>
+                <th scope="col">Statut</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let document of documenets">
+                <td>{{ document.createdAt }}</td>
+
+                <td>
+                  <span class="badge rounded-pill bg-warning">{{
+                    document.type
+                  }}</span>
+                </td>
+                <td>
+                  <span class="badge rounded-pill bg-primary">{{
+                    document.status
+                  }}</span>
+                </td>
+                <td *ngIf="document.status === 'Rejected'">
+                  <button
+                    class="action-button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModalLong"
+                    (click)="onSelectDocument(document)"
+                  >
+                    <span class="icon">!</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        @if (documenets.length) {
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-end">
+            <li
+              class="page-item"
+              [class.disabled]="pageNumber === 1"
+              (click)="previousPage()"
+            >
+              <a class="page-link">Previous</a>
+            </li>
+            <li
+              *ngFor="let page of totalPagesArray()"
+              class="page-item"
+              [class.active]="pageNumber === page"
+              (click)="goToPage(page)"
+            >
+              <a class="page-link">{{ page }}</a>
+            </li>
+            <li
+              class="page-item"
+              [class.disabled]="pageNumber === totalPages"
+              (click)="nextPage()"
+            >
+              <a class="page-link">Next</a>
+            </li>
+          </ul>
+        </nav>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModalLong"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true"
+  #exampleModalLong
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ selectedDocument?.comment }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

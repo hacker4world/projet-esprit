@@ -1,0 +1,66 @@
+<div class="main_content_iner">
+    <div class="container-fluid p-0">
+      <div class="row justify-content-center">
+        <div class="col">
+          <div class="white_box mb_30">
+            <div class="row justify-content-center">
+              <div class="col-lg-6">
+                <div class="modal-content cs_modal">
+                  <div class="modal-header justify-content-center theme_bg_1">
+                    <h5 class="modal-title text_white">Log in</h5>
+                  </div>
+                  <div class="modal-body">
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                      <div>
+                        <input type="text" formControlName="username" class="form-control" placeholder="Enter your email">
+                        <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+                          <small *ngIf="loginForm.get('username')?.errors?.['required']">username is required.</small>
+                          <small *ngIf="loginForm.get('username')?.errors?.['minlength']">username must be at least 3 characters.</small>
+                        </div>
+                      </div>
+                      <div>
+                        <input type="password" formControlName="password" class="form-control" placeholder="Password">
+                        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                          <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+                          <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters.</small>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn_1 full_width text-center" [disabled]="loginForm.invalid">Log in</button>
+                      <p>Need an account? <a [routerLink]="['/api/auth/register']">Sign Up</a></p>
+                      <div class="text-center">
+                        <a [routerLink]="['/api/auth/forget-password']" class="pass_forget_btn">Forget Password?</a>
+                      </div>
+                    </form>
+                    <div class="qrCanvas">
+                      <qrcode #qrCanvas [qrdata]="qrCodeValue" [width]="256" [errorCorrectionLevel]="'M'"  [style.display]="true ? 'none' : 'block'"></qrcode>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="qrModal" #qrModal tabindex="-1" role="dialog" aria-labelledby="qrModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="qrModalLabel">QR Code Verification</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- <img *ngIf="qrCodeDataUrl" [src]="qrCodeDataUrl" alt="QR Code"> -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
